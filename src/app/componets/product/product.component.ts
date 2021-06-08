@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Product } from 'src/app/models/product';
+import {HttpClient} from '@angular/common/http';
+import { ProductService } from 'src/app/service/product.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-product',
@@ -7,23 +11,34 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductComponent implements OnInit {
 
-
-  product:any={productId:1,productName:'Bardak',categoryId:1,unitPrice:5}
-  product2:any={productId:1,productName:'Laptop',categoryId:1,unitPrice:5}
-  product3:any={productId:1,productName:'Mouse',categoryId:1,unitPrice:5}
-  product4:any={productId:1,productName:'Keyboard',categoryId:1,unitPrice:5}
-  product5:any={productId:1,productName:'Camera',categoryId:1,unitPrice:5}
-
-  products=[this.product,
-    this.product2,
-    this.product3,
-    this.product4,
-    this.product5]
-
-
-  constructor() { }
-
+  products:Product[]=[];
+  dataLoaded =false;
+  constructor(private productService:ProductService,private activatedRoute:ActivatedRoute) { }
+ 
   ngOnInit(): void {
+   this.activatedRoute.params.subscribe(params=> {
+     if(params["categoryId"]){
+     this.GetProductsByCategory(params["categoryId"]);
+     }
+
+     else{
+     this.GetProducts();
+     }
+   })
+  }
+//aktifleştirilmiş root
+  GetProducts(){
+    this.productService.GetProducts().subscribe((response)=> {
+      this.products= response.data;
+      this.dataLoaded =true;
+    });
   }
 
+  GetProductsByCategory(categoryId:number){
+    this.productService.GetPrductsByCategory(categoryId).subscribe((response)=> {
+      this.products= response.data;
+      console.log(response)
+      this.dataLoaded =true;
+    });
+  }
 }
