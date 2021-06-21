@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CartItem } from 'src/app/models/cartItem';
 import { Product } from 'src/app/models/product';
+import { ProductDetail } from 'src/app/models/productDetail';
 import { CartService } from 'src/app/service/cart.service';
 
 @Component({
@@ -23,7 +24,7 @@ export class CartSummaryComponent implements OnInit {
     
   }
 
-  removeFromCart(product:Product){
+  removeFromCart(product:ProductDetail){
     this.cartService.RemoveFromCart(product);
   }
 

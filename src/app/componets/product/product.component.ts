@@ -5,6 +5,7 @@ import { ProductService } from 'src/app/service/product.service';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CartService } from 'src/app/service/cart.service';
+import { ProductDetail } from 'src/app/models/productDetail';
 
 @Component({
   selector: 'app-product',
@@ -14,6 +15,7 @@ import { CartService } from 'src/app/service/cart.service';
 export class ProductComponent implements OnInit {
 
   products:Product[]=[];
+  productDetails:ProductDetail[]=[];
   dataLoaded =false;
   filterText="";
   constructor(private productService:ProductService,private activatedRoute:ActivatedRoute,private toastrService:ToastrService,private cartService:CartService) { }
@@ -31,8 +33,8 @@ export class ProductComponent implements OnInit {
   }
 //aktifleştirilmiş root
   GetProducts(){
-    this.productService.GetProducts().subscribe((response)=> {
-      this.products= response.data;
+    this.productService.GetProductDetails().subscribe((response)=> {
+      this.productDetails= response.data;
       this.dataLoaded =true;
     });
   }
@@ -45,7 +47,7 @@ export class ProductComponent implements OnInit {
     });
   }
 
-  addToCart(product:Product){
+  addToCart(product:ProductDetail){
     this.cartService.addToCart(product);
     this.toastrService.success("sepete eklendi")
   }
