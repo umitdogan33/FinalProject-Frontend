@@ -1,13 +1,15 @@
+<div class="mb-3">
+  <input type="text" [(ngModel)]="filterText" class="form-control" id="filtertext" placeholder="kategori ismi giriniz">
+</div>
+
 <ul class="list-group">
   <li
-    (click)="setCurrentCategory(category)"
-      *ngFor="let category of categories"
-      routerLink="products/category/{{category.categoryId}}"
-    [class]="getCurrentCategoryClass(category)"
+     class="list-group-item" *ngFor="let category of categories | filterpipeCategory:filterText"
   >
     {{ category.categoryName }}
   </li>
 </ul>
 
-<h5 *ngIf="currentCategory">{{ currentCategory.categoryName }} seçtiniz</h5>
+
+
 

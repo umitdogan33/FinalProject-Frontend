@@ -3,6 +3,8 @@ import { Product } from 'src/app/models/product';
 import {HttpClient} from '@angular/common/http';
 import { ProductService } from 'src/app/service/product.service';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { CartService } from 'src/app/service/cart.service';
 
 @Component({
   selector: 'app-product',
@@ -13,7 +15,8 @@ export class ProductComponent implements OnInit {
 
   products:Product[]=[];
   dataLoaded =false;
-  constructor(private productService:ProductService,private activatedRoute:ActivatedRoute) { }
+  filterText="";
+  constructor(private productService:ProductService,private activatedRoute:ActivatedRoute,private toastrService:ToastrService,private cartService:CartService) { }
  
   ngOnInit(): void {
    this.activatedRoute.params.subscribe(params=> {
@@ -41,4 +44,13 @@ export class ProductComponent implements OnInit {
       this.dataLoaded =true;
     });
   }
+
+  addToCart(product:Product){
+    this.cartService.addToCart(product);
+    this.toastrService.success("sepete eklendi")
+  }
+
+  
+
+
 }
