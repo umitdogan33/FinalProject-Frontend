@@ -13,7 +13,7 @@ export class UserService {
   constructor(private httpClient:HttpClient) { }
   apiUrl = environment.BaseUrl;
 getByEmail(email:string):Observable<SingleResponseModel<User>>{
-  return this.httpClient.get<SingleResponseModel<User>>(this.apiUrl+"users/email?email="+email)
+  return this.httpClient.get<SingleResponseModel<User>>(this.apiUrl+"Users/email?email="+email)
 }
 
 profileUpdate(user:User):Observable<ResponseModel>{

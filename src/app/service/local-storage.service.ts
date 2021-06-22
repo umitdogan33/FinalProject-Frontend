@@ -26,4 +26,8 @@ Clean(){
 GetToken(){
   return localStorage.getItem("token")
 }
+
+SetList(key:string,value:any){
+  this.localStorage.setItem(key,value)
+}
 }

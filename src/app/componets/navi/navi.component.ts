@@ -13,7 +13,7 @@ import { UserService } from 'src/app/service/user.service';
   styleUrls: ['./navi.component.css'],
 })
 export class NaviComponent implements OnInit {
-  // email = this.localStorageService.Get('email');  isLoggedIn=false;
+   email = this.localStorageService.Get('email').toString(); 
   user:User=new User();
   dataLoaded:boolean = false;
   
@@ -64,7 +64,7 @@ export class NaviComponent implements OnInit {
     console.log("email: ",this.localStorageService.Get("email"))
     if(this.localStorageService.Get("email")){
        console.log("çalıştı")
-      this.userService.getByEmail(this.localStorageService.Get("email").toString()).subscribe(response=>{
+      this.userService.getByEmail(this.email).subscribe(response=>{
         this.user = response.data;
       })
     }

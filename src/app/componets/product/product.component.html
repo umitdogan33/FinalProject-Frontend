@@ -39,12 +39,12 @@
 </table> -->
 
 <div class="row">
-<div *ngFor="let product of productDetails" class="card,kutu" style="width: 18rem;" id="cards">
+<div *ngFor="let product of productDetails" class="card,col-2" style="width: 18rem;" id="cards">
   <img src="..." class="card-img-top" alt="..." id="cardimg">
   <div class="card-body">
     <h5 class="card-title">{{product.productName}}</h5>
     <p class="card-text">unitPrice :{{product.unitPrice|currency}}</p>
-    <a  class="btn btn-primary">sepete ekle </a>
+    <a  class="btn btn-primary" (click)="addToCart(product)">sepete ekle </a>
   </div>
 </div>
 </div>

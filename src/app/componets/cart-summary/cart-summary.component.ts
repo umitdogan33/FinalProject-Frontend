@@ -3,6 +3,7 @@ import { CartItem } from 'src/app/models/cartItem';
 import { Product } from 'src/app/models/product';
 import { ProductDetail } from 'src/app/models/productDetail';
 import { CartService } from 'src/app/service/cart.service';
+import { LocalStorageService } from 'src/app/service/local-storage.service';
 
 @Component({
   selector: 'app-cart-summary',
@@ -11,9 +12,9 @@ import { CartService } from 'src/app/service/cart.service';
 })
 export class CartSummaryComponent implements OnInit {
 
-  cartItems:CartItem[]=[];
+  cartItems:CartItem[];
   
-  constructor(private cartService:CartService) { }
+  constructor(private cartService:CartService,  private localStorage: LocalStorageService) { }
 
   ngOnInit(): void {
     this.getCart();
