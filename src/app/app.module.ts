@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import{HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import{FormsModule,ReactiveFormsModule} from '@angular/forms';
@@ -19,6 +19,8 @@ import { LoginComponent } from './componets/login/login.component'
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { RegisterComponent } from './componets/register/register.component';
 import { FilterpipeCategoryPipe } from './pipes/filterpipe-category.pipe';
+import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
+import { ErrorComponent } from './componets/error/error.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { FilterpipeCategoryPipe } from './pipes/filterpipe-category.pipe';
     ProductAddComponent,
     LoginComponent,
     RegisterComponent,
-    FilterpipeCategoryPipe
+    FilterpipeCategoryPipe,
+    AdminLayoutComponent,
+    ErrorComponent
     
   ],
   imports: [
@@ -47,6 +51,7 @@ import { FilterpipeCategoryPipe } from './pipes/filterpipe-category.pipe';
     })
   ],
   providers: [{provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true}],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

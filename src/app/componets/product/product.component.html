@@ -12,7 +12,7 @@
   {{filterText}} aradınız
 </div>
 
-<table *ngIf="dataLoaded==true"  class="table">
+<!-- <table *ngIf="dataLoaded==true"  class="table">
   <thead>
     <tr>
       <th>Id</th>
@@ -36,4 +36,14 @@
     </tr>
   </tbody>
   
-</table>
+</table> -->
+
+
+<div *ngFor="let product of productDetails" class="card" style="width: 18rem;" id="cards">
+  <!-- <img src="..." class="card-img-top" alt="..."> -->
+  <div class="card-body">
+    <h5 class="card-title">{{product.productName}}</h5>
+    <p class="card-text">unitPrice :{{product.unitPrice|currency}}</p>
+    <a  class="btn btn-primary">sepete ekle </a>
+  </div>
+</div>
