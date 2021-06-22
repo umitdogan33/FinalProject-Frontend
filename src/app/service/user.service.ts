@@ -12,8 +12,8 @@ import { User } from '../models/user';
 export class UserService {
   constructor(private httpClient:HttpClient) { }
   apiUrl = environment.BaseUrl;
-getByEmail(email:string):Observable<SingleResponseModel<User>>{
-  return this.httpClient.get<SingleResponseModel<User>>(this.apiUrl+"Users/email?email="+email)
+getByEmail(email:string):Observable<User>{
+  return this.httpClient.get<User>(this.apiUrl+"Users/email?email="+email)
 }
 
 profileUpdate(user:User):Observable<ResponseModel>{

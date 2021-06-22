@@ -1,15 +1,19 @@
-
-
 <div *ngIf="dataLoaded == false" class="spinner-border" role="status">
   <span class="visually-hidden">Loading...</span>
 </div>
 
 <div class="mb-3">
   <label for="filterText" class="form-label">ürün ara</label>
-  <input type="text"  [(ngModel)]="filterText"  class="form-control" id="filterText" placeholder="lütfen ürün ismi giriniz">
+  <input
+    type="text"
+    [(ngModel)]="filterText"
+    class="form-control"
+    id="filterText"
+    placeholder="lütfen ürün ismi giriniz"
+  />
 </div>
 <div *ngIf="filterText" class="alert alert-success">
-  {{filterText}} aradınız
+  {{ filterText }} aradınız
 </div>
 
 <!-- <table *ngIf="dataLoaded==true"  class="table">
@@ -37,14 +41,19 @@
   </tbody>
   
 </table> -->
-
+    <!-- style="width: 18rem" -->
 <div class="row">
-<div *ngFor="let product of productDetails" class="card,col-2" style="width: 18rem;" id="cards">
-  <img src="..." class="card-img-top" alt="..." id="cardimg">
-  <div class="card-body">
-    <h5 class="card-title">{{product.productName}}</h5>
-    <p class="card-text">unitPrice :{{product.unitPrice|currency}}</p>
-    <a  class="btn btn-primary" (click)="addToCart(product)">sepete ekle </a>
+  <div
+    *ngFor="let product of productDetails"
+    class="card col-4"
+
+    id="cards"
+  >
+    <img src="..." class="card-img-top" alt="..." id="cardimg" />
+    <div class="card-body">
+      <h5 class="card-title">{{ product.productName }}</h5>
+      <p class="card-text">unitPrice :{{ product.unitPrice | currency }}</p>
+      <a class="btn btn-primary" (click)="addToCart(product)">sepete ekle </a>
+    </div>
   </div>
-</div>
 </div>

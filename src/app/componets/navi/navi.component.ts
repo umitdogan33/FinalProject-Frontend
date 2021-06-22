@@ -13,61 +13,50 @@ import { UserService } from 'src/app/service/user.service';
   styleUrls: ['./navi.component.css'],
 })
 export class NaviComponent implements OnInit {
-   email = this.localStorageService.Get('email').toString(); 
-  user:User=new User();
-  dataLoaded:boolean = false;
-  
-  constructor(private authService:AuthService,private localStorageService:LocalStorageService,private userService:UserService,private  toastrService:ToastrService,private router:Router) { }
+  email = this.localStorageService.Get('email');
+  user: User = new User();
+  constructor(private authService: AuthService,
+    private localStorageService: LocalStorageService,
+    private userService: UserService,
+    private toastrService: ToastrService,
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
-
     this.checkToLogin();
     this.checkToEmail();
+    this.getEmail();
 
-   this.getEmail();
-   this.adminControl();
   }
 
-  adminControl() {
-    if(this.authService.getCurrentRoles()=="admin"){
+  checkToLogin() {
+    if (this.authService.isAuthencation()) {
       return true;
+    } else {
+      return false;
     }
-    else{
+  }
+
+  checkToEmail() {
+    if (this.localStorageService.Get('email')) {
+      return true;
+    } else {
       return false;
     }
   }
 
 
-  checkToLogin(){
-    if(this.authService.isAuthencation()){
-      return true;
-    }else{
-      return false;
-    }
-  }
-
-  checkToEmail(){
-    if(this.localStorageService.Get('email')){
-      return true;
-    }else{
-      return false;
+  getEmail() {
+    if (this.email) {
+      this.userService.getByEmail(this.email).subscribe(response => {
+        this.user = response;
+      })
     }
   }
 
   logOut(){
-   this.localStorageService.Clean()
-    this.toastrService.success("Başarıyla Çıkış Yapıldı");
-    this.router.navigate(["/"])
-  }
-
-  getEmail(){
-    console.log("email: ",this.localStorageService.Get("email"))
-    if(this.localStorageService.Get("email")){
-       console.log("çalıştı")
-      this.userService.getByEmail(this.email).subscribe(response=>{
-        this.user = response.data;
-      })
-    }
+    this.localStorageService.Clean();
+    this.toastrService.info("çıkış yapıldı"); 
   }
 
 }
