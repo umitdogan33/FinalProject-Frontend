@@ -18,7 +18,7 @@ export class AuthService {
 
   apiUrl  = "https://localhost:44308/api/Auth"
 
-  constructor(private httpClient:HttpClient,private storageService:LocalStorageService,) { }
+  constructor(private httpClient:HttpClient,private storageService:LocalStorageService) {this.setUserStats()}
 
 
   login(user:LoginModel){
