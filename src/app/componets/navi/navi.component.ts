@@ -26,7 +26,7 @@ export class NaviComponent implements OnInit {
     this.checkToLogin();
     this.checkToEmail();
     this.getEmail();
-
+    this.adminControl();
   }
 
   checkToLogin() {
@@ -59,4 +59,12 @@ export class NaviComponent implements OnInit {
     this.toastrService.info("çıkış yapıldı"); 
   }
 
-}
+
+  adminControl() {
+    if(this.authService.getCurrentRoles()=="admin"){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }}

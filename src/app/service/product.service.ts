@@ -5,6 +5,7 @@ import { ListResponseModel } from '../models/listResponseModel';
 import { Product } from '../models/product';
 import { ProductDetail } from '../models/productDetail';
 import { ResponseModel } from '../models/responseModel';
+import { SingleResponseModel } from '../models/singleResponseModel';
 
 
 @Injectable({
@@ -35,6 +36,11 @@ add(product:Product):Observable<ResponseModel>{
   return this.httpClient.post<ResponseModel>(this.apiUrl+"Products/Add",product)  
 }
 
+Delete(product:Product):Observable<ResponseModel>{
+  return this.httpClient.post<ResponseModel>(this.apiUrl+"Products/Delete",product)  
+}
+
+
 
   GetProductDetails():Observable<ListResponseModel<ProductDetail>>{
     let newPath= this.apiUrl+"Products/GetAllDetails";
@@ -42,6 +48,11 @@ add(product:Product):Observable<ResponseModel>{
     return this.httpClient.get<ListResponseModel<ProductDetail>>(newPath);
   
 
+}
+
+GetProductsById(Id: number):Observable<SingleResponseModel<ProductDetail>> {
+ let newPath  =this.apiUrl+"Products/GetById"+Id;
+ return this.httpClient.get<SingleResponseModel<ProductDetail>>(newPath);
 }
 
 }
